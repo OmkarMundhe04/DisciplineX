@@ -1,0 +1,52 @@
+:root {
+  --bg: #f8fafc;
+  --text: #0f172a;
+  --card: #ffffff;
+  --border: #e2e8f0;
+  --primary: #6366f1;
+  --secondary: #64748b;
+}
+
+body.dark {
+  --bg: #020617;
+  --text: #f1f5f9;
+  --card: #0f172a;
+  --border: #1e293b;
+  --primary: #818cf8;
+  --secondary: #94a3b8;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  transition: all 0.3s ease;
+}
+/* ===== NAVBAR BUTTONS ===== */
+
+.nav-btn {
+  background: linear-gradient(135deg, #6366f1, #3b82f6);
+  color: white;
+
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: none;
+
+  font-size: 13px;
+  font-weight: 500;
+
+  cursor: pointer;
+  transition: all 0.25s ease;
+
+  box-shadow: 0 4px 12px rgba(59,130,246,0.2);
+}
+
+/* Hover effect */
+.nav-btn:hover {
+  transform: translateY(-1px) scale(1.05);
+  box-shadow: 0 8px 20px rgba(59,130,246,0.3);
+}
+
+/* Active click */
+.nav-btn:active {
+  transform: scale(0.96);
+}

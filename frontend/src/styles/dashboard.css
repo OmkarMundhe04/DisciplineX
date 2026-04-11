@@ -1,0 +1,223 @@
+/* ===== LAYOUT ===== */
+
+.dashboard-container {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 24px;
+  padding: 24px;
+}
+
+/* ===== SIDEBAR ===== */
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ===== CARD SYSTEM ===== */
+
+.card,
+.stat-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px;
+
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+
+  transition: all 0.25s ease;
+}
+
+.card:hover,
+.stat-card:hover {
+  transform: translateY(-2px);
+}
+
+/* ===== TYPOGRAPHY ===== */
+
+.stat-title {
+  font-size: 13px;
+  color: var(--secondary);
+  margin-bottom: 6px;
+}
+
+.stat-value {
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+}
+
+/* ===== PROGRESS BAR ===== */
+
+.progress-bar {
+  margin-top: 12px;
+  height: 8px;
+  background: var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 999px;
+
+  background: linear-gradient(90deg, #6366f1, #8b5cf6);
+  transition: width 0.4s ease;
+}
+
+/* ===== MAIN CONTENT ===== */
+
+.main-content > div:first-child {
+  display: flex;
+  gap: 10px;
+}
+
+.main-content > div:first-child button {
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--text);
+
+  padding: 8px 14px;
+  border-radius: 999px; /* 🔥 modern pill style */
+
+  font-size: 13px;
+  font-weight: 500;
+
+  transition: all 0.2s ease;
+}
+
+.main-content > div:first-child button:hover {
+  background: var(--primary);
+  color: white;
+  transform: scale(1.05);
+}
+/* ===== INPUT + ADD TASK ===== */
+
+.add-task {
+  display: flex;
+  gap: 10px;
+}
+
+input {
+  background: transparent;
+  border: 1px solid var(--border);
+  padding: 12px;
+  border-radius: 10px;
+  color: var(--text);
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+input:focus {
+  outline: none;
+  border: 1px solid var(--primary);
+  box-shadow: 0 0 0 2px rgba(99,102,241,0.15);
+}
+
+/* ===== BUTTONS ===== */
+
+button {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 500;
+
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  transform: scale(1.03);
+  opacity: 0.9;
+}
+
+/* ===== DELETE BUTTON ===== */
+
+button.delete-btn {
+  background: #ef4444;
+}
+
+/* ===== TASK LIST ===== */
+
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ===== TASK CARD ===== */
+
+.task-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 14px 18px;
+  border-radius: 12px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  transition: all 0.2s ease;
+}
+
+.task-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 30px rgba(99,102,241,0.08);
+}
+
+.task-title {
+  font-size: 15px;
+  color: var(--text);
+}
+
+.task-completed {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
+/* ===== BUTTON GROUP ===== */
+
+.task-actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* ===== STREAK DATES ===== */
+
+.stat-card div div {
+  color: var(--secondary);
+}
+
+/* ===== BACKGROUND ===== */
+
+body {
+  background: linear-gradient(135deg, #f8fafc, #e0e7ff);
+  transition: all 0.3s ease;
+}
+
+.dark body {
+  background: linear-gradient(135deg, #020617, #0f172a);
+}
+
+/* ===== SCROLLBAR (PREMIUM TOUCH) ===== */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 10px;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 768px) {
+  .dashboard-container {
+    grid-template-columns: 1fr;
+  }
+}
