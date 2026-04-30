@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://disciplinex-1.onrender.com"
+  baseURL: "https://disciplinex-1.onrender.com/api"
 });
 
 // Attach token automatically
