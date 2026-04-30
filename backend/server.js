@@ -11,10 +11,7 @@ connectDB();
 
 // Middleware
 app.use(cors({
-  origin: [
-    "http://localhost:3000",
-    "https://discipline-x-xi.vercel.app"
-  ],
+  origin: true,
   credentials: true
 }));
 app.use(express.json());
