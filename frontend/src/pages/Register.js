@@ -10,15 +10,18 @@ const Register = () => {
   });
 
   const handleRegister = async () => {
-    try {
-      await API.post("/auth/register", form);
-      alert("Registered successfully");
-      window.location.href = "/";
-    } catch (err) {
-      alert("Error registering");
-      console.log(err);
-    }
-  };
+  try {
+    await API.post("/auth/register", form);
+    alert("Registered successfully");
+    window.location.href = "/";
+  } catch (err) {
+    console.log(err.response); // debug
+
+    alert(
+      err.response?.data?.message || "Something went wrong"
+    );
+  }
+};
 
   return (
     <div className="container" style={{

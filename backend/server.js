@@ -9,15 +9,11 @@ const app = express();
 // Connect DB
 connectDB();
 
-// ✅ MIDDLEWARE FIRST
-app.use(cors({
-  origin: "http://localhost:3000",
-  credentials: true
-}));
-
+// Middleware
+app.use(cors());  // 🔥 for now keep it open
 app.use(express.json());
 
-// ✅ ROUTES AFTER MIDDLEWARE
+// Routes
 const authRoutes = require("./routes/authRoutes");
 const taskRoutes = require("./routes/taskRoutes");
 
