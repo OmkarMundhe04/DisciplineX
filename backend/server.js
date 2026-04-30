@@ -10,7 +10,13 @@ const app = express();
 connectDB();
 
 // Middleware
-app.use(cors());  // 🔥 for now keep it open
+app.use(cors({
+  origin: [
+    "http://localhost:3000",
+    "https://your-project.vercel.app"
+  ],
+  credentials: true
+}));
 app.use(express.json());
 
 // Routes

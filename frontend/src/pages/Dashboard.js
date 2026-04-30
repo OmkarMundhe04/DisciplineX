@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import API from "../services/api";
 import Navbar from "../components/Navbar";
 import "../styles/global.css";
@@ -15,7 +15,28 @@ const Dashboard = () => {
     new Date().toISOString().split("T")[0]
   );
 
-  // ✅ DELETE TASK (with confirmation)
+  // ✅ Fetch tasks
+  const fetchTasks = useCallback(async () => {
+    try {
+      const res = await API.get(`/tasks/by-date?date=${selectedDate}`);
+      setTasks(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  }, [selectedDate]);
+
+  // ✅ Fetch streak
+  const fetchStreak = useCallback(async () => {
+    try {
+      const res = await API.get("/tasks/streak");
+      setStreak(res.data.streak);
+      setStreakDates(res.data.dates || []);
+    } catch (err) {
+      console.log(err);
+    }
+  }, []);
+
+  // ✅ Delete task
   const deleteTask = async (id) => {
     if (!window.confirm("Delete this task?")) return;
 
@@ -28,28 +49,7 @@ const Dashboard = () => {
     }
   };
 
-  // Fetch tasks by date
-  const fetchTasks = async () => {
-    try {
-      const res = await API.get(`/tasks/by-date?date=${selectedDate}`);
-      setTasks(res.data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  // Fetch streak
-  const fetchStreak = async () => {
-    try {
-      const res = await API.get("/tasks/streak");
-      setStreak(res.data.streak);
-      setStreakDates(res.data.dates || []);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  // Add task
+  // ✅ Add task
   const addTask = async () => {
     if (!title.trim()) return;
 
@@ -68,7 +68,7 @@ const Dashboard = () => {
     }
   };
 
-  // Toggle task
+  // ✅ Toggle task
   const toggleTask = async (id) => {
     try {
       await API.put(`/tasks/toggle/${id}`);
@@ -79,10 +79,11 @@ const Dashboard = () => {
     }
   };
 
+  // ✅ FIXED useEffect (IMPORTANT)
   useEffect(() => {
     fetchTasks();
     fetchStreak();
-  }, [selectedDate]);
+  }, [fetchTasks, fetchStreak]);
 
   const completed = tasks.filter((t) => t.completed).length;
   const progress =
@@ -94,10 +95,8 @@ const Dashboard = () => {
 
       <div className="dashboard-container">
 
-        {/* LEFT SIDE */}
         <div className="sidebar">
 
-          {/* STREAK */}
           <motion.div
             className="stat-card"
             initial={{ scale: 0.95, opacity: 0 }}
@@ -121,7 +120,6 @@ const Dashboard = () => {
             </div>
           </motion.div>
 
-          {/* PROGRESS */}
           <motion.div
             className="stat-card"
             initial={{ scale: 0.95, opacity: 0 }}
@@ -140,10 +138,8 @@ const Dashboard = () => {
 
         </div>
 
-        {/* RIGHT SIDE */}
         <div className="main-content">
 
-          {/* DATE NAVIGATION */}
           <div style={{ display: "flex", gap: "10px", marginBottom: "10px" }}>
             <button onClick={() => {
               const d = new Date(selectedDate);
@@ -168,7 +164,6 @@ const Dashboard = () => {
             </button>
           </div>
 
-          {/* ADD TASK */}
           <div className="card">
             <h3>Add Task ({selectedDate})</h3>
 
@@ -190,7 +185,6 @@ const Dashboard = () => {
             </div>
           </div>
 
-          {/* TASK LIST */}
           <div className="card">
             <h3>Tasks for {selectedDate}</h3>
 
@@ -216,7 +210,6 @@ const Dashboard = () => {
                     {t.title}
                   </span>
 
-                  {/* ✅ BUTTON GROUP */}
                   <div style={{ display: "flex", gap: "8px" }}>
                     <button
                       className="task-btn"
@@ -226,9 +219,10 @@ const Dashboard = () => {
                     </button>
 
                     <button
-                        className="delete-btn"
-                        onClick={() => deleteTask(t._id)}>
-                        Delete
+                      className="delete-btn"
+                      onClick={() => deleteTask(t._id)}
+                    >
+                      Delete
                     </button>
                   </div>
 
